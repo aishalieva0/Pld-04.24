@@ -26,6 +26,8 @@ def index():
     conn.close()
     return render_template('index.html', blogs=blogs)
 
+
+
 @app.route('/create', methods=['POST', 'GET'])
 def create():
     if request.method == 'POST':
@@ -39,7 +41,7 @@ def create():
         conn.close()
         return redirect(url_for('index'))
     
-    return redirect(url_for('index'))
+    return render_template('create.html')
 
 @app.route('/edit/<int:id>') 
 def edit(id):
@@ -48,7 +50,7 @@ def edit(id):
     return render_template('edit.html', blog=blog)
 
 
-@app.route('/update/<int:id>', methods=['POST'])
+@app.route('/update/<int:id>', methods=['POST', 'GET'])
 def update(id):
     if request.method == 'POST':
         title = request.form['title']
@@ -62,7 +64,7 @@ def update(id):
     return redirect(url_for('index'))
 
 
-@app.route('/delete/<int:id>', methods=['POST'])
+@app.route('/delete/<int:id>', methods=['POST', 'GET'])
 def delete(id):
     if request.method == 'POST':
         conn = get_db_connection()
