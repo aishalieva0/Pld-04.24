@@ -15,7 +15,7 @@ def index():
     conn.close()
     return render_template('index.html', blogs=blogs)
 
-@app.route('create', methods='POST')
+@app.route('/create', methods=['POST'])
 def create():
     if request.method == 'POST':
         title = request.form['title']
@@ -28,14 +28,14 @@ def create():
         conn.close()
     return redirect(url_for('index'))
 
-@app.route('edit/<int:id>') 
+@app.route('/edit/<int:id>') 
 def edit(id):
     conn = get_db_connection()
     blog = conn.execute('SELECT * FROM blogs WHERE id = ?', (id,)).fetchone()
     return render_template('edit.html', blog=blog)
 
 
-@app.route('update/<int:id>', methods='POST')
+@app.route('/update/<int:id>', methods=['POST'])
 def update(id):
     if request.method == 'POST':
         title = request.form['title']
