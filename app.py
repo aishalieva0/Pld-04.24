@@ -43,7 +43,7 @@ def create():
     
     return render_template('create.html')
 
-@app.route('/update/<int:id>', methods=['POST', 'GET'])
+@app.route('/update/<id>', methods=['POST', 'GET'])
 def update(id):
     if request.method == 'POST':
         title = request.form['title']
