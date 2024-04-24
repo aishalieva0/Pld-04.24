@@ -37,6 +37,8 @@ def create():
                          (title, content))
         conn.commit()
         conn.close()
+        return redirect(url_for('index'))
+    
     return redirect(url_for('index'))
 
 @app.route('/edit/<int:id>') 
@@ -56,7 +58,9 @@ def update(id):
                          (title, content, id))
         conn.commit()
         conn.close()
+        return redirect(url_for('index'))
     return redirect(url_for('index'))
+
 
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete(id):
@@ -65,4 +69,5 @@ def delete(id):
         conn.execute('DELETE FROM blogs WHERE id = ?', (id,))
         conn.commit()
         conn.close()
+        return redirect(url_for('index'))
     return redirect(url_for('index'))
