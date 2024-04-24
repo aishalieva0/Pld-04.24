@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Homepage</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>My Website</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="create.html">Create</a>
+        </div>
+    </header>
+    {% for blog in blogs %}
+    <div class="card">
+        <div class="card-header">
+            {{ blog.title}}
+        </div>
+
+        <div class="card-content">
+            {{ blog.content }}
+        </div>
+        <a href="{{ url_for('edit', id=blog.id) }}" class="btn edit-btn">Edit</a>
+        <a href="{{ url_for('delete', id=blog.id) }}" class="btn delete-btn">Delete</a>
+        
+    {% endfor %}
+
+    </div>
+
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var headingText = document.getElementById('headingInput').value;
+            var textData = document.getElementById('textInput').value;
+            var displayArea = document.getElementById('display-area');
+            displayArea.innerHTML = '<h2>' + headingText + '</h2><p>' + textData + '</p>';
+        });
+    </script>
+</body>
+
+</html>

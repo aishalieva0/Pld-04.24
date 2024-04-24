@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Blog</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <header>
+        <h1>My Website</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="create.html">Form</a>
+        </div>
+    </header>
+    <div class="container">
+        <h1>Edit Blog post</h1>
+        <form id="myForm" method="post" action="{{ url_for('update') }}">
+            <input type="text" placeholder="Enter title" name="title" value="{{ blog.title }}">
+            <textarea id="textInput" placeholder="Enter content" name="content" value="{{ blog.content }}"></textarea>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
