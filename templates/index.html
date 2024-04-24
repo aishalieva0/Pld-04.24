@@ -25,10 +25,9 @@
         <div class="card-content">
             {{ blog.content }}
         </div>
+        <a href="{{ url_for('update', id=blog.id) }}" class="btn edit-btn">Edit</a>
 
-        <form method="get" action="{{ url_for('update', id=blog.id) }}">
-            <button type="submit" class="btn edit-btn">Edit</button>
-        </form>
+      
 
         <form method="POST" action="{{ url_for('delete', id=blog.id) }}">
             <button type="submit" class="btn delete-btn">Delete</button>
