@@ -50,7 +50,7 @@ def edit(id):
     return render_template('edit.html', blog=blog)
 
 
-@app.route('/update/<int:id>', methods=['POST', 'GET'])
+@app.route('/update/<id>', methods=['POST', 'GET'])
 def update(id):
     if request.method == 'POST':
         title = request.form['title']
@@ -64,12 +64,10 @@ def update(id):
     return redirect(url_for('index'))
 
 
-@app.route('/delete/<int:id>', methods=['POST', 'GET'])
+@app.route('/delete/<id>', methods=['DELETE'])
 def delete(id):
-    if request.method == 'POST':
-        conn = get_db_connection()
-        conn.execute('DELETE FROM blogs WHERE id = ?', (id,))
-        conn.commit()
-        conn.close()
-        return redirect(url_for('index'))
+    conn = get_db_connection()
+    conn.execute('DELETE FROM blogs WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
     return redirect(url_for('index'))
