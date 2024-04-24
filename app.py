@@ -26,7 +26,7 @@ def index():
     conn.close()
     return render_template('index.html', blogs=blogs)
 
-@app.route('/create', methods=['POST'])
+@app.route('/create', methods=['POST', 'GET'])
 def create():
     if request.method == 'POST':
         title = request.form['title']
