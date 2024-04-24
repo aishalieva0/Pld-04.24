@@ -43,14 +43,7 @@ def create():
     
     return render_template('create.html')
 
-@app.route('/edit/<int:id>') 
-def edit(id):
-    conn = get_db_connection()
-    blog = conn.execute('SELECT * FROM blogs WHERE id = ?', (id,)).fetchone()
-    return render_template('edit.html', blog=blog)
-
-
-@app.route('/update/<id>', methods=['POST', 'GET'])
+@app.route('/update/<int:id>', methods=['POST', 'GET'])
 def update(id):
     if request.method == 'POST':
         title = request.form['title']
@@ -61,7 +54,12 @@ def update(id):
         conn.commit()
         conn.close()
         return redirect(url_for('index'))
-    return redirect(url_for('index'))
+    else:
+        conn = get_db_connection()
+        blog = conn.execute('SELECT * FROM blogs WHERE id = ?', (id,)).fetchone()
+        conn.close()
+        return render_template('edit.html', blog=blog)
+
 
 
 @app.route('/delete/<id>', methods=['POST', 'GET'])
