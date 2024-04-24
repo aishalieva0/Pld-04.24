@@ -64,10 +64,12 @@ def update(id):
     return redirect(url_for('index'))
 
 
-@app.route('/delete/<id>', methods=['DELETE'])
+@app.route('/delete/<id>', methods=['POST', 'GET'])
 def delete(id):
-    conn = get_db_connection()
-    conn.execute('DELETE FROM blogs WHERE id = ?', (id,))
-    conn.commit()
-    conn.close()
+    if request.method == 'POST':
+        conn = get_db_connection()
+        conn.execute('DELETE FROM blogs WHERE id = ?', (id,))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('index'))
     return redirect(url_for('index'))

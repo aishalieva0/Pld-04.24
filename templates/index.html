@@ -26,7 +26,10 @@
             {{ blog.content }}
         </div>
         <a href="{{ url_for('edit', id=blog.id) }}" class="btn edit-btn">Edit</a>
-        <a href="{{ url_for('delete', id=blog.id) }}" class="btn delete-btn">Delete</a>
+        <form method="POST" action="{{ url_for('delete', id=blog.id) }}">
+            <button type="submit" class="btn delete-btn">Delete</button>
+        </form>
+        
         
     {% endfor %}
 
