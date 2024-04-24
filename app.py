@@ -3,10 +3,21 @@ import sqlite3
 
 app = Flask(__name__)
 
+
+
+import sqlite3
+
 def get_db_connection():
     connection = sqlite3.connect('blog.db')
     connection.row_factory = sqlite3.Row
+    connection.execute("""
+        CREATE TABLE IF NOT EXISTS blogs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        title TEXT NOT NULL,
+        content TEXT NOT NULL)""")
     return connection
+
 
 @app.route('/')
 def index():
