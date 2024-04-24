@@ -19,7 +19,7 @@
         <h1>Edit Blog post</h1>
         <form id="myForm" method="post" action="{{ url_for('update', id=blog.id) }}">
             <input type="text" placeholder="Enter title" name="title" value="{{ blog.title }}">
-            <textarea id="textInput" placeholder="Enter content" name="content" value="{{ blog.content }}"></textarea>
+            <textarea id="textInput" placeholder="Enter content" name="content">{{ blog.content }}</textarea>
             <input type="submit" value="Submit">
         </form>
     </div>
